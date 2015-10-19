@@ -3,27 +3,29 @@
 
 #include <stddef.h>
 
-struct ListNode;
+struct ADS_LinkedListNode;
 
-typedef struct ListNode {
-    struct ListNode *next;
+typedef struct ADS_LinkedListNode {
+    struct ADS_LinkedListNode *next;
     void *value;
-} * ListNode;
+} * ADS_LinkedListNode;
 
-
-typedef struct LinkedList {
-    ListNode head;
-    ListNode tail;
+typedef struct ADS_LinkedList {
+    ADS_LinkedListNode head;
+    ADS_LinkedListNode tail;
     size_t size;
-} * LinkedList;
+} * ADS_LinkedList;
 
-typedef void (*free_linked_node_value)(void*);
+typedef void (*ADS_LinkedNode_free)(void*);
 
-LinkedList allocte_linked_list();
-void destroy_linked_list(LinkedList);
-void destroy_linked_list_force(LinkedList, free_linked_node_value);
-void append_node_to_linked_list(LinkedList, void*);
-void prepend_node_to_linked_list(LinkedList, void*);
-void* remove_head_node_from_linked_list(LinkedList);
+ADS_LinkedList ADS_LinkedList_allocate();
+
+void ADS_LinkedList_destroy(ADS_LinkedList);
+void ADS_LinkedList_destroy_deep(ADS_LinkedList, ADS_LinkedNode_free);
+
+void ADS_LinkedList_append_node(ADS_LinkedList, void*);
+void ADS_LinkedList_prepend_node(ADS_LinkedList, void*);
+
+void* ADS_LinkedList_remove_head(ADS_LinkedList);
 
 #endif // LINKED_LIST_H

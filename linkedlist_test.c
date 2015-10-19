@@ -7,23 +7,23 @@ void free_int(void *);
 
 int main()
 {
-    LinkedList list = allocte_linked_list();
+    ADS_LinkedList list = ADS_LinkedList_allocate();
 
     for (int i = 0; i < 10; ++i) {
         int *v = malloc(sizeof(int));
         *v = i;
-        append_node_to_linked_list(list, v);
+        ADS_LinkedList_append_node(list, v);
     }
 
     printf("List size: %ld\n", list->size);
 
     while (list->size) {
-        void *val = remove_head_node_from_linked_list(list);
+        void *val = ADS_LinkedList_remove_head(list);
         printf("%d\n", *((int *) val));
         free(val);
     }
 
-    destroy_linked_list(list);
+    ADS_LinkedList_destroy(list);
 
     exit(EXIT_SUCCESS);
 }

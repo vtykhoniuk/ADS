@@ -7,23 +7,23 @@ void free_int(void *);
 
 int main()
 {
-    LinkedStack stack = allocte_linked_stack();
+    ADS_LinkedStack stack = ADS_LinkedStack_allocate();
 
     for (int i = 0; i < 10; ++i) {
         int *v = malloc(sizeof(int));
         *v = i;
-        linked_stack_push(stack, v);
+        ADS_LinkedStack_push(stack, v);
     }
 
     printf("Stack size: %ld\n", stack->size);
 
     while (stack->size) {
-        void *val = linked_stack_pop(stack);
+        void *val = ADS_LinkedStack_pop(stack);
         printf("%d\n", *((int *) val));
         free(val);
     }
 
-    destroy_linked_stack(stack);
+    ADS_LinkedStack_destroy(stack);
 
     exit(EXIT_SUCCESS);
 }

@@ -2,9 +2,9 @@
 
 #include <stdlib.h>
 
-LinkedList allocte_linked_list()
+ADS_LinkedList ADS_LinkedList_allocate()
 {
-    LinkedList list = malloc(sizeof(struct LinkedList));
+    ADS_LinkedList list = malloc(sizeof(struct ADS_LinkedList));
     list->head = NULL;
     list->tail = NULL;
     list->size = 0;
@@ -12,12 +12,12 @@ LinkedList allocte_linked_list()
     return list;
 }
 
-void destroy_linked_list(LinkedList list)
+void ADS_LinkedList_destroy(ADS_LinkedList list)
 {
-    ListNode node = list->head;
+    ADS_LinkedListNode node = list->head;
 
     while (node) {
-        ListNode tmp = node->next;
+        ADS_LinkedListNode tmp = node->next;
         free(node);
         node = tmp;
     }
@@ -25,12 +25,12 @@ void destroy_linked_list(LinkedList list)
     free(list);
 }
 
-void destroy_linked_list_force(LinkedList list, free_linked_node_value f)
+void ADS_LinkedList_destroy_deep(ADS_LinkedList list, ADS_LinkedNode_free f)
 {
-    ListNode current = list->head;
+    ADS_LinkedListNode current = list->head;
 
     while (current) {
-        ListNode next = current->next;
+        ADS_LinkedListNode next = current->next;
         f(current->value);
         free(current);
         current = next;
@@ -39,9 +39,9 @@ void destroy_linked_list_force(LinkedList list, free_linked_node_value f)
     free(list);
 }
 
-void append_node_to_linked_list(LinkedList list, void *value)
+void ADS_LinkedList_append_node(ADS_LinkedList list, void *value)
 {
-    ListNode node = malloc(sizeof(struct ListNode));
+    ADS_LinkedListNode node = malloc(sizeof(struct ADS_LinkedListNode));
     node->next = NULL;
     node->value = value;
 
@@ -54,9 +54,9 @@ void append_node_to_linked_list(LinkedList list, void *value)
     list->size++;
 }
 
-void prepend_node_to_linked_list(LinkedList list, void *value)
+void ADS_LinkedList_prepend_node(ADS_LinkedList list, void *value)
 {
-    ListNode node = malloc(sizeof(struct ListNode));
+    ADS_LinkedListNode node = malloc(sizeof(struct ADS_LinkedListNode));
     node->next = NULL;
     node->value = value;
 
@@ -69,12 +69,12 @@ void prepend_node_to_linked_list(LinkedList list, void *value)
     list->size++;
 }
 
-void* remove_head_node_from_linked_list(LinkedList list)
+void* ADS_LinkedList_remove_head(ADS_LinkedList list)
 {
     if (!list->head)
         return NULL;
 
-    ListNode next = list->head->next;
+    ADS_LinkedListNode next = list->head->next;
     void *val = list->head->value;
     free(list->head);
     list->head = next;
