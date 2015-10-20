@@ -25,13 +25,13 @@ void ADS_LinkedList_destroy(ADS_LinkedList list)
     free(list);
 }
 
-void ADS_LinkedList_destroy_deep(ADS_LinkedList list, ADS_LinkedNode_free f)
+void ADS_LinkedList_destroy_deep(ADS_LinkedList list, ADS_LinkedNode_free destructor)
 {
     ADS_LinkedListNode current = list->head;
 
     while (current) {
         ADS_LinkedListNode next = current->next;
-        f(current->value);
+        destructor(current->value);
         free(current);
         current = next;
     }
@@ -71,15 +71,27 @@ void ADS_LinkedList_prepend_node(ADS_LinkedList list, void *value)
 
 void* ADS_LinkedList_remove_head(ADS_LinkedList list)
 {
-    if (!list->head)
+    if (list->size == 0)
         return NULL;
 
-    ADS_LinkedListNode next = list->head->next;
     void *val = list->head->value;
-    free(list->head);
-    list->head = next;
+
+    if (list->size == 1) {
+        free(list->head);
+        list->head = list->tail = NULL;
+    } else {
+        ADS_LinkedListNode next = list->head->next;
+        free(list->head);
+        list->head = next;
+    }
 
     list->size--;
 
     return val;
+}
+
+void ADS_LinkedList_remove_head_deep(ADS_LinkedList list, ADS_LinkedNode_free destructor)
+{
+    void *v = ADS_LinkedList_remove_head(list);
+    destructor(v);
 }

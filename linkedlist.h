@@ -27,5 +27,6 @@ void ADS_LinkedList_append_node(ADS_LinkedList, void*);
 void ADS_LinkedList_prepend_node(ADS_LinkedList, void*);
 
 void* ADS_LinkedList_remove_head(ADS_LinkedList);
+void ADS_LinkedList_remove_head_deep(ADS_LinkedList, ADS_LinkedNode_free);
 
 #endif // LINKED_LIST_H

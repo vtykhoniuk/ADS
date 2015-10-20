@@ -12,7 +12,7 @@ LINKEDSTACK_TEST_OBJ = linkedstack_test.o
 LINKEDSTACK_TEST = linkedstack_test
 
 
-all: lib ${LINKEDLIST_TEST} ${LINKEDSTACK_TEST}
+all: lib
 
 lib: ${LINKEDLIST_OBJ}
 	ar rcs ${ADS_LIB} $?
@@ -25,6 +25,10 @@ clean: force_look
 	rm -f ${ADS_LIB}
 	rm -f ${LINKEDLIST_OBJ} ${LINKEDLIST_TEST_OBJ} ${LINKEDSTACK_TEST_OBJ}
 	rm -f ${LINKEDLIST_TEST} ${LINKEDSTACK_TEST}
+
+test: ${LINKEDLIST_TEST} ${LINKEDSTACK_TEST}
+	valgrind --leak-check=yes --leak-check=full --show-leak-kinds=all ./${LINKEDLIST_TEST} 
+	valgrind --leak-check=yes --leak-check=full --show-leak-kinds=all ./${LINKEDSTACK_TEST}
 
 force_look:
 	@true
