@@ -29,8 +29,8 @@ clean: force_look
 	rm -f ${LINKEDLIST_TEST} ${LINKEDSTACK_TEST}
 
 test: ${LINKEDLIST_TEST} ${LINKEDSTACK_TEST}
-	valgrind --leak-check=yes --leak-check=full --show-leak-kinds=all ./${LINKEDLIST_TEST} 
-	valgrind --leak-check=yes --leak-check=full --show-leak-kinds=all ./${LINKEDSTACK_TEST}
+	valgrind --leak-check=full ./${LINKEDLIST_TEST} 
+	valgrind --leak-check=full ./${LINKEDSTACK_TEST}
 
 install: lib
 ifndef INSTALL_PREFIX
