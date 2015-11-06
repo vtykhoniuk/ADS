@@ -1,9 +1,9 @@
 CC                  = cc
-CFLAGS              = -g -std=c99 -I. -O1 -Wall
+CFLAGS              = -g -std=c99 -I./include -O1 -Wall
 INSTALL             = $(shell which install)
 
 ADS_LIB = libads.a
-ADS_INC = linkedlist.h linkedstack.h
+ADS_INC = include/ADS
 
 LINKEDLIST_TEST_OBJ = linkedlist_test.o
 LINKEDLIST_TEST = linkedlist_test
@@ -37,7 +37,8 @@ ifndef INSTALL_PREFIX
 	$(error INSTALL_PREFIX is not defined)
 else
 	$(INSTALL) $(ADS_LIB) $(INSTALL_PREFIX)/lib/
-	$(INSTALL) $(ADS_INC) $(INSTALL_PREFIX)/include/
+	mkdir -p $(INSTALL_PREFIX)/include/ADS
+	$(INSTALL) -m644 $(ADS_INC)/* $(INSTALL_PREFIX)/$(ADS_INC)
 endif
 
 force_look:

@@ -1,4 +1,4 @@
-#include "linkedstack.h"
+#include "ADS/linkedstack.h"
 
 #include <stdlib.h>
 #include <stdio.h>
