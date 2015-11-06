@@ -36,7 +36,7 @@ install: lib
 ifndef INSTALL_PREFIX
 	$(error INSTALL_PREFIX is not defined)
 else
-	$(INSTALL) $(ADS_LIB) $(INSTALL_PREFIX)/lib/
+	$(INSTALL) -m644 $(ADS_LIB) $(INSTALL_PREFIX)/lib/
 	mkdir -p $(INSTALL_PREFIX)/include/ADS
 	$(INSTALL) -m644 $(ADS_INC)/* $(INSTALL_PREFIX)/$(ADS_INC)
 endif
